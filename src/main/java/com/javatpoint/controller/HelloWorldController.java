@@ -9,4 +9,12 @@ public String hello()
 {
 return "Hello ***************";
 }
+
+
+
+@RequestMapping("/{name}")
+    public String hello(String name)
+    {
+        return "Hello *************** "+name;
+    }
 }

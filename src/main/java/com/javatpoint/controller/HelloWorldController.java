@@ -19,11 +19,12 @@ return "Hello ***************";
 
 
 
-@GetMapping("/cmd/{name}")
-    public String hello(@RequestParam String name)
+@GetMapping("/cmd")
+    public String hello1()
     {
+        int exitCode =0;
+       System.out.println("==============START==================") ;
        StringBuffer sb = new StringBuffer();
-       sb.append(name+" ");
         ProcessBuilder processBuilder = new ProcessBuilder();
 
         processBuilder.command("bash", "-c", "ls -ltr");
@@ -40,10 +41,11 @@ return "Hello ***************";
 
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+                System.out.println("===========>"+line);
+                sb.append(line+"<br>");
             }
 
-            int exitCode = process.waitFor();
+            exitCode = process.waitFor();
             sb.append(exitCode);
             System.out.println("\nExited with error code : " + exitCode);
 
@@ -52,6 +54,8 @@ return "Hello ***************";
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("Hello ***************exitCode= " + sb);
+        sb.append("Hello ***************exitCode= " + exitCode);
         return "Hello ***************exitCode= "+sb;
     }
 }
